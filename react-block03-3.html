@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Block03-3</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" defer crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" defer crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.10.3/babel.min.js" defer crossorigin></script>
+  <style>
+    #root {
+    max-width: 106.25rem;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: lightcyan;
+    }
+    .wrapper {
+        border: 2px solid grey;
+        padding: 1.25rem;
+        display: flex;
+        gap: 1.25rem;
+    }
+    button {
+        width: 10rem;
+        border: none;
+        background-color: lightgreen;
+        cursor: pointer;
+        height: 40px;
+    }
+    input{
+        width: 200px;
+        padding: 0px 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="react,stage-3">
+    const EmailInput = ({ value, setValue }) => {
+      return <input type="text" value={value} placeholder="Email" onChange={(e) => setValue(e.target.value)} />;
+    };
+
+    const PasswordInput = ({ value, setValue }) => {
+      return <input type="password" value={value} placeholder="Password" onChange={(e) => setValue(e.target.value)} />;
+    };
+
+    const SubmitButton = ({ email, password, setEmail, setPassword }) => {
+      const handleClick = () => {
+        alert(`Email: ${email}, Password: ${password}`);
+        setEmail('');
+        setPassword('');
+      };
+
+      return <button onClick={handleClick}>Submit</button>;
+    };
+
+    const App = () => {
+      const [email, setEmail] = React.useState('');
+      const [password, setPassword] = React.useState('');
+
+      return (
+        <>
+        <h3>Fill Out The Form</h3>
+        <div className='wrapper'>
+          <EmailInput value={email} setValue={setEmail} />
+          <PasswordInput value={password} setValue={setPassword} />
+          <SubmitButton email={email} password={password} setEmail={setEmail} setPassword={setPassword} />
+        </div>
+        </>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />);
+  </script>
+</body>
+
+</html>
